@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "412036068208",
+    "firebase_url": "https://hooked-app2019.firebaseio.com",
+    "project_id": "hooked-app2019",
+    "storage_bucket": "hooked-app2019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412036068208:android:5ea4d675c2c03855",
+        "android_client_info": {
+          "package_name": "com.github.johntinashe.hooked"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412036068208-mdn1prqmrna6jjd0i6kd4g7jdsfssc89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.github.johntinashe.hooked",
+            "certificate_hash": "08802debd5ccad923127e40026aa6980f970c234"
+          }
+        },
+        {
+          "client_id": "412036068208-623gp1deljbv15orbie747e1h2v8h7rd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTQnguMpgdSkwIV81Bf64sbKRxJ2D20Xg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412036068208-623gp1deljbv15orbie747e1h2v8h7rd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
