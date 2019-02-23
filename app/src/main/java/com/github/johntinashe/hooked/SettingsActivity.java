@@ -6,12 +6,18 @@ import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,7 +25,8 @@ import android.widget.Toast;
 
 import com.github.johntinashe.hooked.Utils.Utils;
 import com.github.johntinashe.hooked.model.Setting;
-import com.github.johntinashe.hooked.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -36,6 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 
@@ -68,6 +76,27 @@ public class SettingsActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDB =FirebaseFirestore.getInstance();
         getDetails();
+
+
+        NavigationView navigationView = findViewById(R.id.navigationMenu);
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        LinearLayout linearLayout = navigationView.findViewById(R.id.logout);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowCustomEnabled(true);
+
+        final LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        assert inflater != null;
+        View action_bar_view = inflater.inflate(R.layout.main_toolbar, null);
+        assert actionBar != null;
+        actionBar.setCustomView(action_bar_view);
+        ImageView drawerToggle = action_bar_view.findViewById(R.id.drawerToggle);
+        TextView title = action_bar_view.findViewById(R.id.title_tv);
+        title.setText(R.string.settings);
+
+        Utils.setNavigationView(navigationView, drawerLayout, drawerToggle, SettingsActivity.this, linearLayout, mAuth);
 
         Permissions.check(this, Manifest.permission.ACCESS_FINE_LOCATION, null, new PermissionHandler() {
             @Override
@@ -199,6 +228,11 @@ public class SettingsActivity extends AppCompatActivity {
                       Address address = getAddress(settings.getLocation().getLatitude(),settings.getLocation().getLongitude());
                       if (address != null)
                       locationTV.setText(address.getLocality() +"," +address.getCountryName());
+                      if (settings.getGender() == null) {
+                          genderPref.setText(R.string.set);
+                      } else {
+                          genderPref.setText(settings.getGender());
+                      }
                   }
               }
             }
@@ -232,35 +266,79 @@ public class SettingsActivity extends AppCompatActivity {
     public void selectGenderPref(){
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
 
         builder.setTitle("Select Your Gender Preference");
         builder.setCancelable(true);
 
-        builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialog, int item) {
+        mDB.collection("users").document(mAuth.getUid()).collection("settings")
+                .document(mAuth.getUid())
+                .get()
+                .addOnSuccessListener(this, new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                switch(item)
-                {
-                    case 0:
+                        if (documentSnapshot != null) {
 
-                        Toast.makeText(SettingsActivity.this, "First Item Clicked", Toast.LENGTH_LONG).show();
-                        break;
-                    case 1:
+                            int i = -1;
 
-                        Toast.makeText(SettingsActivity.this, "Second Item Clicked", Toast.LENGTH_LONG).show();
-                        break;
-                    case 2:
+                            if (documentSnapshot.getString("gender") != null) {
+                                String value = documentSnapshot.getString("gender");
+                                if (value != null) {
+                                    if (value.equalsIgnoreCase("male"))
+                                        i = 0;
+                                    else if (value.equalsIgnoreCase("female"))
+                                        i = 1;
+                                    else if (value.equalsIgnoreCase("any"))
+                                        i = 2;
+                                }
+                            }
 
-                        Toast.makeText(SettingsActivity.this, "Third Item Clicked", Toast.LENGTH_LONG).show();
-                        break;
-                }
-                alertDialog1.dismiss();
-            }
-        });
-        alertDialog1 = builder.create();
-        alertDialog1.show();
+                            builder.setSingleChoiceItems(values, i, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int item) {
+
+                                    switch (item) {
+                                        case 0:
+                                            updateGender("Male");
+                                            alertDialog1.dismiss();
+                                            break;
+                                        case 1:
+                                            updateGender("Female");
+                                            alertDialog1.dismiss();
+                                            break;
+                                        case 2:
+                                            updateGender("Any");
+                                            alertDialog1.dismiss();
+                                            break;
+                                    }
+                                    alertDialog1.dismiss();
+                                }
+                            });
+                        }
+                        alertDialog1 = builder.create();
+                        alertDialog1.show();
+                    }
+
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SettingsActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    public void updateGender(String v) {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("gender", v);
+
+        mDB.collection("users").document(mAuth.getUid()).collection("settings")
+                .document(mAuth.getUid())
+                .set(map, SetOptions.merge());
 
     }
 

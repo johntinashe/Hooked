@@ -1,7 +1,7 @@
 package com.github.johntinashe.hooked;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -18,7 +18,7 @@ public class MessagesActivity extends AppCompatActivity {
 
         ArrayList<Message> messages = new ArrayList<>();
         messages.add(new Message("John","Hey wasssup !" , null));
-        messages.add(new Message("Tinashe","damn you !" , null));
+        messages.add(new Message("Tinashe", "hello you !", null));
         messages.add(new Message("John","Hey how are you doing boss?" , null));
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,messages);

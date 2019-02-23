@@ -6,7 +6,7 @@
     android:elevation="10dp">
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/drawerToggle"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentStart="true"
@@ -15,5 +15,19 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         app:srcCompat="@drawable/ic_action_menu" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/drawerToggle"
+        android:layout_alignBottom="@+id/drawerToggle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="-4dp"
+        android:layout_toEndOf="@+id/drawerToggle"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
 </RelativeLayout>
