@@ -14,6 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
+        android:contentDescription="@string/bg"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -27,6 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
+        android:contentDescription="@string/favorite_button"
         android:src="@drawable/ic_star_shape" />
 
     <TextView
@@ -93,6 +95,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/age_dis_tv"
+        android:contentDescription="@string/dislike"
         android:src="@drawable/ic_cross_shape" />
 
     <ImageView
@@ -106,6 +109,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/age_dis_tv"
+        android:contentDescription="@string/like_button"
         android:src="@drawable/ic_heart_shape" />
 
 </android.support.constraint.ConstraintLayout>

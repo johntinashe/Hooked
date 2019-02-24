@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private Context mContext;
-    private ArrayList<Message> mMessages;
+    private final Context mContext;
+    private final ArrayList<Message> mMessages;
 
     RecyclerViewAdapter(Context context, ArrayList<Message> messages) {
         mMessages = messages;
@@ -68,10 +68,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
      class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView username,lastMsg;
-        Button blockBtn;
-        Button archiveBtn;
-        View bgView;
+         final TextView username;
+         final TextView lastMsg;
+         final Button blockBtn;
+         final Button archiveBtn;
+         final View bgView;
 
          ViewHolder(@NonNull View itemView) {
             super(itemView);

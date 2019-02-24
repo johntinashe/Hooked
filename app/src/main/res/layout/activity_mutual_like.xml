@@ -53,6 +53,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView9"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toBottomOf="@+id/imageView9"
+        android:contentDescription="heart"
         app:srcCompat="@drawable/ic_action_heart" />
 
     <TextView
@@ -62,7 +63,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="It's a match!"
+        android:text="@string/it_s_a_match"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
@@ -77,7 +78,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:padding="5dp"
-        android:text="You and Ben like each other,  you can now send him a message"
+        android:text="@string/sample"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView9"
@@ -92,7 +93,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="64dp"
         android:background="@drawable/send_btn_ripple"
-        android:text="Send a Message"
+        android:text="@string/send_a_message"
         android:textAllCaps="false"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="@+id/view"
@@ -107,7 +108,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:background="@drawable/keep_browsing_ripple"
-        android:text="Keep Browsing"
+        android:text="@string/keep_browsing"
         android:textAllCaps="false"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="@+id/view"

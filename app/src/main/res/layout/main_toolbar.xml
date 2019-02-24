@@ -14,6 +14,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
+        android:contentDescription="@string/navigation"
         app:srcCompat="@drawable/ic_action_menu" />
 
     <TextView

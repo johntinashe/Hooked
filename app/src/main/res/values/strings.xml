@@ -22,4 +22,27 @@
     <string name="pro_version">pro version</string>
     <string name="you_want_to_make_the_most_out_of_hooked">You want to make the most out of Hooked?</string>
     <string name="general">GENERAL</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_sign_up_here">Don\'t have an account? Sign up here</string>
+    <string name="keep_browsing">Keep Browsing</string>
+    <string name="send_a_message">Send a Message</string>
+    <string name="sample">You and Ben like each other, you can now send him a message</string>
+    <string name="it_s_a_match">It\'s a match!</string>
+    <string name="your_age">Your age</string>
+    <string name="choose_a_username">Choose a username</string>
+    <string name="already_a_member">Already a member?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="bg">background</string>
+    <string name="favorite_button">favorite button</string>
+    <string name="dislike">dislike</string>
+    <string name="like_button">like button</string>
+    <string name="block">Block</string>
+    <string name="archive">Archive</string>
+    <string name="hey_how_was_the_concert_last_night">Hey! how was the concert last night??</string>
+    <string name="_09_50">09:50</string>
+    <string name="john_tsoro">John Tsoro</string>
+    <string name="status">status</string>
+    <string name="navigation">navigation</string>
+    <string name="silver">Silver</string>
+    <string name="john_t_tsoro">John T Tsoro</string>
 </resources>

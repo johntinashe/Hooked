@@ -1,6 +1,7 @@
 package com.github.johntinashe.hooked;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.location.Address;
@@ -63,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
     @BindView(R.id.gender_pref_tv) TextView genderPref;
 
     AlertDialog alertDialog1;
-    CharSequence[] values = {" Male "," Female "," Any "};
+    final CharSequence[] values = {" Male ", " Female ", " Any "};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         final LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         assert inflater != null;
-        View action_bar_view = inflater.inflate(R.layout.main_toolbar, null);
+        @SuppressLint("InflateParams") View action_bar_view = inflater.inflate(R.layout.main_toolbar, null);
         assert actionBar != null;
         actionBar.setCustomView(action_bar_view);
         ImageView drawerToggle = action_bar_view.findViewById(R.id.drawerToggle);
@@ -328,6 +329,7 @@ public class SettingsActivity extends AppCompatActivity {
                         Toast.makeText(SettingsActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
                     }
                 });
+
 
     }
 

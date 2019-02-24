@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dmax.dialog.SpotsDialog;
 
+@SuppressWarnings("SameParameterValue")
 public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.register_btn) TextView registerBtn;

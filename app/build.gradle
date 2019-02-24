@@ -35,11 +35,15 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
+    //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-core:16.0.6'
+    //noinspection GradleDependency
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-firestore:17.0.1'
     implementation 'com.androidadvance:topsnackbar:1.1.1'
+    //noinspection GradleDependency
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
     implementation 'com.github.david-serrano:locationprovider:1.2'
     implementation 'com.nabinbhandari.android:permissions:3.8'

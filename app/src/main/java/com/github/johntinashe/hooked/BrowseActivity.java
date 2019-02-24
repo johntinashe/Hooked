@@ -1,8 +1,12 @@
 package com.github.johntinashe.hooked;
 
+import android.annotation.SuppressLint;
 import android.arch.paging.PagedList;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -27,13 +31,18 @@ import com.github.johntinashe.hooked.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.Query;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,7 +82,7 @@ public class BrowseActivity extends AppCompatActivity {
 
         final LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         assert inflater != null;
-        View action_bar_view = inflater.inflate(R.layout.main_toolbar, null);
+        @SuppressLint("InflateParams") View action_bar_view = inflater.inflate(R.layout.main_toolbar, null);
         assert actionBar != null;
         actionBar.setCustomView(action_bar_view);
         ImageView drawerToggle = action_bar_view.findViewById(R.id.drawerToggle);
@@ -116,6 +125,20 @@ public class BrowseActivity extends AppCompatActivity {
                         holder.carouselView.setPageCount(uris.size());
                         holder.username.setText(model.getUsername());
                         holder.age.setText(model.getAge() + " years old");
+
+                        try {
+                            Address address = new AysTask().execute(model.getLocation()).get();
+                            if (address != null) {
+                                holder.age.append(" -" + address.getLocality() + "," + address.getCountryName());
+                            } else {
+                                holder.age.append(" -Unknown location");
+                            }
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 };
 
@@ -164,7 +187,7 @@ public class BrowseActivity extends AppCompatActivity {
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
 
-        ImageListener imageListener = new ImageListener() {
+        final ImageListener imageListener = new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
                 if (uris != null) {
@@ -172,9 +195,10 @@ public class BrowseActivity extends AppCompatActivity {
                 }
             }
         };
-        private CarouselView carouselView;
-        private ConstraintLayout constraintLayout;
-        private TextView username, age;
+        private final CarouselView carouselView;
+        private final ConstraintLayout constraintLayout;
+        private final TextView username;
+        private final TextView age;
 
         UserViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -183,6 +207,44 @@ public class BrowseActivity extends AppCompatActivity {
             constraintLayout = itemView.findViewById(R.id.browseView);
             username = itemView.findViewById(R.id.username_tv);
             age = itemView.findViewById(R.id.age_dis_tv);
+        }
+
+    }
+
+    /*Async task to get the current location of the user */
+
+    public class AysTask extends AsyncTask<GeoPoint, Void, Address> {
+
+        @Override
+        protected Address doInBackground(GeoPoint... geoPoints) {
+
+            Geocoder geocoder;
+            List addresses;
+            geocoder = new Geocoder(BrowseActivity.this, Locale.getDefault());
+
+            if (geoPoints != null) {
+                GeoPoint point = geoPoints[0];
+
+                if (point != null) {
+                    try {
+                        // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                        addresses = geocoder.getFromLocation(point.getLatitude(), point.getLongitude(), 1);
+                        if (addresses != null) {
+                            return (Address) addresses.get(0);
+                        } else {
+                            return null;
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+
+            } else {
+                return null;
+            }
         }
 
     }
