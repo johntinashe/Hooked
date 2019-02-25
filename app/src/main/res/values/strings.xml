@@ -22,7 +22,6 @@
     <string name="pro_version">pro version</string>
     <string name="you_want_to_make_the_most_out_of_hooked">You want to make the most out of Hooked?</string>
     <string name="general">GENERAL</string>
-    <string name="login">Login</string>
     <string name="don_t_have_an_account_sign_up_here">Don\'t have an account? Sign up here</string>
     <string name="keep_browsing">Keep Browsing</string>
     <string name="send_a_message">Send a Message</string>
@@ -45,4 +44,7 @@
     <string name="navigation">navigation</string>
     <string name="silver">Silver</string>
     <string name="john_t_tsoro">John T Tsoro</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="no_favorites_found">No Favorites Found !</string>
 </resources>

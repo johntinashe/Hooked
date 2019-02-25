@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/browse"
+        android:icon="@drawable/ic_action_browse"
+        android:title="Browse" />
+
+    <item
+        android:id="@+id/messages"
+        android:icon="@drawable/ic_action_messages"
+        android:iconTint="@color/white"
+        android:title="@string/messages"
+        tools:targetApi="o" />
+
+    <item
+        android:id="@+id/matches"
+        android:icon="@drawable/ic_action_matches"
+        android:title="@string/my_matches" />
+    <item
+        android:id="@+id/favorites_nav_drawer"
+        android:icon="@drawable/ic_action_favorites"
+        android:title="@string/favorites" />
+
+    <group>
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_action_settings"
+            android:title="@string/settings" />
+    </group>
+</menu>
