@@ -2,6 +2,17 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+
+    signingConfigs {
+        release {
+            storeFile file("$rootDir/release.hooked") //your release keystore
+            storePassword "youngmula94" //your store password
+            keyAlias "key0" //your key alias
+            keyPassword "youngmula94" //your key password
+        }
+    }
+
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.github.johntinashe.hooked"
